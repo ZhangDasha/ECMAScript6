@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>顶层对象  全局变量</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var a = 11;
+		console.log(window.a);		// 11
+
+		let b = 22;
+		console.log(window.b);		// undifend
+		// 全局变量a由var命令声明，所以它是顶层对象的属性；全局变量b由let命令声明，所以它不是顶层对象的属性，返回undefined。
+	</script>
+</body>
+</html>

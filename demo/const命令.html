@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>const </title>
+</head>
+<body>
+	<script type="text/javascript">
+/*
+		// const 定义引用类型时，只能保证指向的地址不发生改变，不能保证地址内的值是否发生改变。
+		const foo = {};
+		foo.val = 11;					//对于foo内容的改变并不会报错。
+		console.log(foo.val);
+
+		foo = {};		//TypeError: "foo" is read-only		当地址指向发生改变时报错。
+*/
+
+
+		var a = [];
+		a.push("Hello");				//可执行
+		console.log(a.length);				//可执行
+		a = ['daSha'];			//报错
+		// 常量a是一个数组，这个数组本身是可写的，但是如果将另一个数组赋值给a，就会报错。
+	</script>
+</body>
+</html>

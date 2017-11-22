@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="module">
+		// 这是 Traceur 编译器识别 ES6 代码的标志，编译器会自动将所有type=module的代码编译为 ES5，然后再交给浏览器执行。
+	  class Calc {				//function Calc(){}
+	    constructor() {
+	      console.log('Calc constructor');
+	    }
+	    add(a, b) {
+	      return a + b;
+	    }
+	  }
+
+	  var c = new Calc();
+	  console.log(c.add(4,5));
+	</script>
+</body>
+</html>

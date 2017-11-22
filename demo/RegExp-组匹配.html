@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>RegExp-组匹配</title>
+</head>
+<body>
+	<script type="text/javascript">
+		const RE_DATE = /(\d{4})-(\d{2})-(\d{2})/;
+		const obj = RE_DATE.exec('2017-11-21');
+		const date = obj[0]			//2017-11-21
+		const year = obj[1];		//2017
+		const month = obj[2];			//11
+		const day = obj[3];				//21
+		console.log(year,month,day);
+	</script>
+</body>
+</html>

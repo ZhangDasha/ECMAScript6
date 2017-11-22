@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>对象的解构赋值</title>
+</head>
+<body>
+	<script type="text/javascript">
+/*
+		// 对象的属性没有次序，变量必须与属性同名，才能取到正确的值。
+		let {far, bar} = {far:"aaa",bar:"bbb"};
+		console.log(far);				//aaa
+		console.log(bar);				//bbb
+*/
+
+
+/*
+		// 变量名与属性名不一致
+		let {foo:baz} = {foo:"aaa",bar:"bbb"};
+		console.log(baz);				//aaa
+
+		let {first:f,last:l} = {first:"hello",last:"world"};
+		console.log(first)			//error: foo is not defined
+		console.log(f);				//hello
+		console.log(l);				//world
+		//对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。真正被赋值的是后者，而不是前者。
+*/
+
+
+
+		//解构也可以用于嵌套结构的对象。
+		let obj = {
+			p:[
+				"hello",
+				{y:"world"}
+			]
+		};
+		// let {p:[x,{y}]} = obj;
+		// console.log(x);				//hello
+		// console.log(y);				//world
+		// 注意，这时p是模式，不是变量，因此不会被赋值。
+
+		// 如果p也要作为变量赋值，可以写成下面这样。
+		let {p,p:[x,{y}]} = obj;
+		console.log(x);				//hello
+		console.log(y);				//world
+		console.log(p);				// ["hello", {y: "world"}]
+
+
+
+
+
+	</script>
+</body>
+</html>

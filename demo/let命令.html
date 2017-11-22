@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>let 命令</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 只在let命令所在的代码块内有效。
+/*
+		{
+			let a = 1;
+			var b = 2;
+		}
+		console.log(b);
+		// console.log(a);		//a is undefiend
+*/
+
+
+/*
+		var a = [];
+		for(var i=0;i<10;i++){
+			a[i] = function(){
+				console.log(i);
+			};
+		}
+		a[6]();		// 10
+
+		上面代码中，变量i是var命令声明的，在全局范围内都有效，所以全局只有一个变量i.每一次循环，变量i的值都会发生改变，而循环内被赋给数组a的函数内部的console.log(i)，里面的i指向的就是全局的i。
+		所有数组a的成员里面的i，指向的都是同一个i，导致运行时输出的是最后一轮的i的值，也就是10
+*/
+
+
+/*
+		var a = [];
+		for(let i=0; i<10;i++){
+			a[i] = function(){
+				console.log(i);
+			};
+		}
+		a[6]();				// 6
+// 上面代码中，变量i是let声明的，当前的i只在本轮循环有效，所以每一次循环的i其实都是一个新的变量，所以最后输出的是6。
+*/
+
+/*
+//	暂时性死区
+		var a = 123;
+		{
+			a = "abc";		//ReferenceError
+			let a;
+		}
+*/
+
+
+/*
+// ES6的块级作用域
+		(function a(){
+			var a = 11;
+			if(true){
+				var a = 22;
+			}
+			console.log(a);			//22
+		})();
+		(function b(){
+			let b = "bb";
+			if(true){
+				let b = "b+b+b";
+			}
+			console.log(b);			//bb
+			// let不会发生变量提升，
+		})();
+*/
+
+
+
+// 块级作用域与函数声明
+// ES5 规定，函数只能在顶层作用域和函数作用域之中声明，不能在块级作用域声明。
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

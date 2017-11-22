@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>rest属性</title>
+</head>
+<body>
+	<script type="text/javascript">
+			function add(...value){
+				let sum = 0;
+				for(var x of value){
+					sum += x;
+				}
+				return sum;
+			}
+			console.log(add(2,3,5));			//10
+
+
+		function push(array,...items){
+			items.forEach( function(item) {
+				array.push[item];
+				console.log(item);
+			});
+		}
+		var a = [];
+		push(a,1,2,3);			//1,2,3
+	</script>
+</body>
+</html>

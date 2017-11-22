@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数值和布尔值的解构赋值</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。
+		let {toString:s} = 123;
+		console.log(s === Number.prototype.toString);				//true
+
+		let {toBoolean:x} = true;
+		console.log(x === Boolean.prototype.toBoolean);				//true
+		// 数值和布尔值的包装对象都有toString属性，因此变量s都能取到值
+	</script>
+</body>
+</html>

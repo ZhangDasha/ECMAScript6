@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>提取json</title>
+</head>
+<body>
+	<script type="text/javascript">
+		let jsonData = {
+			id:24,
+			status:"lucky",
+			data:[24,10000]
+		}
+		let {id,status,data:number} = jsonData;
+		console.log(id,status,number);		//24,"lucky",[24,1000]
+	</script>
+</body>
+</html>

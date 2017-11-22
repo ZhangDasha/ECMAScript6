@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串模版</title>
+</head>
+<body>
+	<div id="box"></div>
+	<script type="text/javascript">
+/*
+		// 用反引号（`）标识
+		//模板字符串中嵌入变量，需要将变量名写在${}之中。
+		let x = 11
+		document.getElementById('box').innerHTML = `
+			There are <b>daSha ${x}</b> 
+			itemsin your basket, <em>I'am a lucky boy!</em>
+			are on sale!
+		`
+*/
+
+
+		// 引用模版字符串本身
+		// 方法一
+		let str = 'return' + '`hello ${name}`';
+		var fun = new Function('name',str);
+		console.log(fun('Tom'));
+
+		//方法二
+		var str2 = '(name) => `hello ${name}`';
+		var fun2 = eval.call(null,str2);
+		console.log(fun2('Da'));
+	</script>
+</body>
+</html>
