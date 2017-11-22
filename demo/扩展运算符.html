@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+/*
+		// 将一个数组转为用逗号分隔的参数序列。
+		function add(a,b){
+			console.log(a+b);
+		}
+		var arg = [1,2];
+		add(...arg);		//3
+*/
+
+
+/*
+		// 替代数组的 apply 方法
+		// ES5 的写法
+		Math.max.apply(null, [14, 3, 77])
+		// ES6 的写法
+		Math.max(...[14, 3, 77])
+		// 等同于
+		Math.max(14, 3, 77);
+*/
+
+
+		//ES5 
+		var arr1 = [1,2,3];
+		var arr2 = [4,5,6];
+		Array.prototype.push.apply(arr1, arr2);
+		console.log(arr1);			//[1,2,3,4,5,6]
+		// ES6
+		var arr3 = [1,2,3];
+		var arr4 = [4,5,6];
+		arr3.push(...arr4);
+		console.log(arr3);			//[1,2,3,4,5,6]
+	</script>
+</body>
+</html>

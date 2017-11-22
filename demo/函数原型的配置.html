@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>setPrototypeOf / getPrototypeOf</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// setPrototypeOf(object, prototype)
+		// // 用来设置一个对象的prototype对象
+		let proto = {};
+		let obj = {x:10};
+		Object.setPrototypeOf(obj,proto);
+		proto.y = 20;
+		proto.z = [1,2];
+		console.log(obj.x);				//10
+		console.log(obj.y);				//20
+		console.log(obj.z);				//[1,2]
+
+		// getPrototypeOf(obj)
+		//  用来读取一个对象的prototype对象
+		function Person(){ return true};
+		var man = new Person()
+		console.log(Object.getPrototypeOf(man) === Person.prototype);				//true
+	</script>
+</body>
+</html>

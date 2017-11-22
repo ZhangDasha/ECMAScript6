@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>对象可枚举属性的复制-合并</title>
+</head>
+<body>
+	<script type="text/javascript">
+/*
+		const target = {a:1};
+		const source1 = {b:2};
+		const source2 = {c:3};
+		Object.assign(target,source1,source2);
+		console.log(target);			//{a:1,b:2,c:3}
+		// 注意，如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性。
+*/
+
+
+/*
+// 常见用法----------------------------------------------------------------------------
+		// 1.克隆对象
+		var arr = {
+			'name':'da',
+			'age':23
+		}
+		function clone(obj){
+			return Object.assign({},obj);
+		}
+		console.log(clone(arr));				//age:23, name:da
+*/
+
+
+/*
+		//给对象添加属性
+		Object.assign(SomeClass.prototype, {
+		  someMethod(arg1, arg2) {
+		    ···
+		  },
+		  anotherMethod() {
+		    ···
+		  }
+		});
+
+		// 等同于下面的写法
+		SomeClass.prototype.someMethod = function (arg1, arg2) {
+		  ···
+		};
+		SomeClass.prototype.anotherMethod = function () {
+		  ···
+		};
+*/
+
+
+
+		// 合并多个对象
+		const merge =(target, ...sources) => Object.assign(target, ...sources);
+
+	</script>
+</body>
+</html>

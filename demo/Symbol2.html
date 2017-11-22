@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>作为属性名的 Symbol</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// Symbol 值作为对象属性名时,使用[ ].   
+		let mySymbol = Symbol();
+		// 第一种方法
+		let a = {};
+		a[mySymbol] = 'hello';
+		console.log(a[mySymbol]);				//hello
+
+		// 第二种方法
+		let a = {
+			[mySymbol]:'hello'
+		}
+
+		// 第三种方法
+		let a = {};
+		Object.defineProperty(a, [mySymbol], {value:'hello'});
+
+	</script>
+</body>
+</html>
