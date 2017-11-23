@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Map实例的属性和操作方</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// size属性返回 Map 结构的成员总数。
+		const map = new Map();
+		map.set('for',true);
+		map.set('bar',false);
+		console.log(map.size);			//2
+
+
+		// set方法设置键名key对应的键值为value，然后返回整个 Map 结构。
+		let map2 = new Map();
+		// 采用链式写法
+		map2
+			.set(1,'a')
+			.set(2,'b')
+			.set(3,'c');
+		console.log(map2.size);				//3
+
+
+		// get方法读取key对应的键值，如果找不到key，返回undefined。
+		const map3 = new Map();
+		const foo = function()  {console.log('hello');};
+		map3.set(foo,'function');			//键是一个函数
+		console.log(map3.get(foo));				//function
+
+
+		// has方法返回一个布尔值，表示某个键是否在当前 Map 对象之中。
+		const map4 = new Map()
+		map4.set('name','Da');
+		map4.set(4,'a');
+		console.log(map4.has('name'));			//true
+		console.log(map4.has(4));						//true
+
+
+		// delete方法删除某个键，返回true。如果删除失败，返回false。
+		console.log(map4.delete('name'));				//true
+
+
+		// clear方法清除所有成员，没有返回值。
+	</script>
+</body>
+</html>

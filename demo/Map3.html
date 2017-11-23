@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Map遍历方法</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+		Map 结构原生提供三个遍历器生成函数和一个遍历方法。
+			keys()：返回键名的遍历器。
+			values()：返回键值的遍历器。
+			entries()：返回所有成员的遍历器。
+			forEach()：遍历 Map 的所有成员。
+		需要特别注意的是，Map 的遍历顺序就是插入顺序。
+		*/
+		const map = new Map();
+		map
+			.set('F','no')
+			.set('T','yes');
+		// keys()
+		for(let key of map.keys()){
+			console.log(key);			//F  T
+		}
+		// values()
+		for(let value of map.values()){
+			console.log(value);				//no   yes
+		}
+		//entries()
+		for(let[item,value] of map.entries()){
+			console.log(item+':'+value);			//F:no   T:yes
+		}
+		// forEach（）
+		map.forEach(function(value, key, map) {
+		  console.log("Key: %s, Value: %s", key, value);			//Key: F, Value: no   Key: T, Value: yes
+		});
+
+
+		// Map 结构转为数组结构，比较快速的方法是使用扩展运算符（...）。
+		const m = new Map([
+				[1,'one'],
+				[2,'two'],
+				[3,'three']
+			])
+		let a = [...m.keys()];
+		console.log(a);					// [1, 2, 3]
+		let b = [...m.values()];
+		console.log(b);					// ["one", "two", "three"]
+		let c = [...m.entries()];
+		console.log(c);						//略
+		
+
+		// Map结合数组的map方法、filter方法
+		const map2 = new Map(
+  			[...m].map(([k, v]) => [k * 2, '_' + v])
+    );
+    for(let[item,value] of map2.entries()){
+			console.log(item+':'+value);			//F:no   T:yes
+		}
+		// 2:_one
+		// 4:_two
+		// 6:_three
+	</script>
+</body>
+</html>
