@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Proxy构造函数</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var proxy = new Proxy({},{
+			get:function(target,property){
+				return 22;
+			}
+		})
+		console.log(proxy.name);				//22
+		console.log(proxy.call);				//22
+		// 上面代码中，配置对象有一个get方法，用来拦截对目标对象属性的访问请求。get方法的两个参数分别是目标对象和所要访问的属性。可以看到，由于拦截函数总是返回22，所以访问任何属性都得到22。
+
+		// Proxy 实例也可以作为其他对象的原型对象。
+		let obj = Object.create(proxy);
+		console.log(obj.age);				//22
+
+
+		// 多层拦截器函数
+		var handle = {
+			get:function(target,name){
+				if(name === 'prototype'){
+					return Object.prototype;
+				}
+				return 'Hello'+name;
+			},
+			apply:function(target,thisBinding, args){
+				return args[0];
+			},
+			construct: function(target, args){
+				return {value:args[1]};
+			}
+		}
+		var pro = new Proxy(function(x,y){
+			return x+y;
+		},handle);
+		console.log(pro(1,2));			//1
+		console.log(new pro(1,2));				//{value: 2}
+		console.log(pro.x);				//Hellox
+	</script>
+</body>
+</html>

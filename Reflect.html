@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reflect静态属性</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		// Reflect.get(target, name, receiver) 
+		// Reflect.get方法查找并返回target对象的name属性，如果没有该属性，则返回undefined。
+		var obj = {
+			firstName:'Zhang',
+			lastName:'Da',
+			// 部署了读取函数（getter）
+			get fullName(){
+				return this.firstName + this.lastName;
+			},
+		}
+		console.log(Reflect.get(obj,'firstName'));			//Zhang
+		console.log(Reflect.get(obj,'fullName'));					//ZhangDa
+
+
+
+		// Reflect.set(target, name, value, receiver) 
+		// Reflect.set方法设置target对象的name属性等于value。
+		var obj2 = {
+			foo:1,
+			set bar(value){
+				return this.foo = value;
+			},
+		};
+		Reflect.set(obj2,'foo',2);
+		console.log(obj2.foo);			//2
+		Reflect.set(obj2, 'bar',3);
+		console.log(obj2.foo);				//3
+
+
+
+		// Reflect.construct(target, args)
+		// Reflect.construct方法等同于new target(...args)，这提供了一种不使用new，来调用构造函数的方法。
+		function Greeting(name) {
+			this.name = name;
+		}
+		// new 的写法
+		const instance = new Greeting('张三');
+		console.log(instance);							//Greeting {name: "张三"}
+		// Reflect.construct 的写法
+		const instance2 = Reflect.construct(Greeting, ['张Sir']);
+		console.log(instance2);							//Greeting {name: "张Sir"}
+
+
+
+		// Reflect.ownKeys(target)  基本等同于Object.getOwnPropertyNames与Object.getOwnPropertySymbols之和
+		// 用于返回对象的所有属性包括Symbol类型
+		var myObject = {
+			foo: 1,
+			bar: 2,
+			[Symbol.for('baz')]: 3,
+			[Symbol.for('bing')]: 4,
+		};
+		// 旧写法
+		Object.getOwnPropertyNames(myObject)
+		// ['foo', 'bar']
+
+		Object.getOwnPropertySymbols(myObject)
+		//[Symbol(baz), Symbol(bing)]
+
+		// 新写法
+		Reflect.ownKeys(myObject)
+		// ['foo', 'bar', Symbol(baz), Symbol(bing)]
+
+	</script>
+</body>
+</html>

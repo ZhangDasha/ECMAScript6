@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Proxy支持的拦截操作</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		// get方法用于拦截某个属性的读取操作
+		// get(target, propKey, receiver)
+		var person = {
+			name:'DaSha',
+			age:22
+		};
+		var proxy = new Proxy(person,{
+			get:function(target,pro){
+				return target[pro];
+			}
+		})
+		console.log(proxy.name);				//DaSha
+
+
+		// set方法用来拦截某个属性的赋值操作
+		// set(target, propKey, value, receiver)
+		let validator = {
+			set:function(obj,prop,value){
+				if(prop === 'age'){
+					if(!Number.isInteger(value)){
+						throw new TypeError('The age is not an integer');
+					}
+					if(value > 200){
+						throw new RangeError('The age seems invalid');
+					}
+				}
+				obj[prop] = value;
+			}
+		};
+		var proxy2 = new Proxy({},validator);
+		console.log(proxy2.age = 100);				//100
+		// console.log(proxy2.age = 'young');				//报错：The age is not an integer
+		// console.log(proxy2.age = 201);						//报错：The age seems invalid
+
+
+		// apply方法拦截函数的调用、call和apply操作。
+		// apply(target, object, args)
+		let tar = function(){
+			return 'This is a target!';
+		};
+		let handle = {
+			apply:function(){
+				return "I am the proxy";
+			}
+		};
+		let proxy3 = new Proxy(tar,handle);
+		console.log(proxy3());				//I am the proxy
+
+
+		// construct方法用于拦截new命令
+		// construct(target, args)
+		// construct方法返回的必须是一个对象，否则会报错。
+		let cons = {
+			construct:function(target,args){
+				return { value: args[0] * 10 };				//返回必须是一个对象
+			}
+		};
+		let proxy4 = new Proxy(function(){},cons);
+		console.log(new proxy4(1));				//{value: 10}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>
