@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Set实现并，交，差</title>
+</head>
+<body>
+	<script type="text/javascript">
+		let s1 = new Set([1,2,3]);
+		let s2 = new Set([4,3,2]);
+		// 并集
+		let union = new Set([...s1,...s2]);				[1,2,3,4]
+		console.log(union );
+		// 交集
+		let intersect = new Set([...s1].filter(x=>s2.has(x)));
+		console.log(intersect);				[2,3]
+		// 差集
+		let difference = new Set([...s1].filter(x=>!s2.has(x)));
+		console.log(difference);			[1]
+	</script>
+</body>
+</html>
