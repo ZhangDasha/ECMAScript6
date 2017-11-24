@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>.then(null,rejecte)</title>
+</head>
+<body>
+	<script type="text/javascript">
+/*
+		// 原始
+		const promise = new Promise(function(resolve,reject){
+			throw new Error('test');
+		});
+		promise.catch(function(error){
+			console.log(error);
+		});										//Error: test
+
+		// 等价一
+		const promise2 = new Promise(function(resolve,reject){
+			try{
+				throw new Error('test');
+			}catch(e){
+				reject(e);
+			}
+		});
+		promise2.catch(function(error){
+			console.log(error);						//Error:test
+		})
+
+		// 等价二
+		const promise3 = new Promise(function(resolve,reject){
+			reject(new Error('test'));
+		});
+		promise3.catch(function(error){
+			console.log(error);
+		})
+		//比较上面两种写法 可以发现reject方法的作用，等同于抛出错误。
+		// 注：如果 Promise 状态已经变成resolved，再抛出错误是无效的。Promise 对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止。也就是说，错误总是会被下一个catch语句捕获。
+*/
+
+		// catch() + then()
+		Promise.resolve()
+			.catch(function(error){
+				console.log('oh on!',error);
+			})
+			.then(function(){
+				console.log('carry on');						//carry on
+			});
+			// 上面的代码因为没有报错，跳过了catch方法，直接执行后面的then方法。此时，要是then方法里面报错，就与前面的catch无关了。
+			
+	</script>
+</body>
+</html>
