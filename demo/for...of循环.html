@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>for...of循环</title>
+</head>
+<body>
+	<script type="text/javascript">
+/*
+		for...of与其他便利语法的比较：
+		    1.原始for循环繁琐；
+		    2.forEach循环不能return和break；
+		    3.for…in循环只返回键名。不仅遍历数字键名，还会遍历自定义键，甚至原型链上的键。（主要是为遍历对象而设计的，不适用于遍历数组）
+*/
+		const arr1 = ['red','green','blue'];
+		for(let item of arr1){
+			console.log(item);				//red green blue
+		}
+
+		const obj = {};
+		obj[Symbol.iterator] = arr1[Symbol.iterator].bind(arr1);
+		for(let i of obj){
+			console.log(i);				// red green blue
+		}
+		// 上面代码中，空对象obj部署了数组arr的Symbol.iterator属性，结果obj的for...of循环，产生了与arr完全一样的结果。
+
+
+
+		// for…in一般获取对象的键名；    for…of一般获取对象的键值
+		var arr2 = ['a', 'b', 'c', 'd'];
+
+		for (let a in arr2) {
+		  console.log(a); // 0 1 2 3
+		}
+
+		for (let a of arr2) {
+		  console.log(a); // a b c d
+		}
+
+
+		// Set结构
+		let set = new Set(["Gecko", "Trident", "Webkit", "Webkit"]);
+		for(let s of set){
+			console.log(s);					// Gecko  Trident  Webkit
+		}
+		//Map结构
+		let map = new Map();
+		map
+			.set("edition", 6)
+			.set("committee", "TC39")
+			.set("standard", "ECMA-262");
+		for (var [name, value] of map) {
+			console.log(name + ": " + value);
+		}
+		// edition: 6
+		// committee: TC39
+		// standard: ECMA-262
+	</script>
+</body>
+</html>

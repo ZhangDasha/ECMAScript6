@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Iterator</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		// 数组的Symbol.iterator属性
+		let arr = ['a','b'];
+		let iter = arr[Symbol.iterator]();
+		console.log(iter.next());					//{value: "a", done: false}
+		console.log(iter.next());					//{value: "b", done: false}
+		console.log(iter.next());					//{value: undefined, done: true}
+		// 上面代码中，变量arr是一个数组，原生就具有遍历器接口，部署在arr的Symbol.iterator属性上面。
+
+
+		// 类似数组的对象
+		let iterator = {
+			0:'a',
+			1:'b',
+			2:'c',
+			length:3,
+			[Symbol.iterator]:Array.prototype[Symbol.iterator]
+		};
+		for(let item of iterator){
+			console.log(item);					//a,b,c
+		}
+	</script>
+</body>
+</html>
