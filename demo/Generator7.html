@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Generator构造函数的实现</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		// 需要解决this与new的问题
+		function* gen(){
+			this.a = 1;
+			yield this.b = 2;
+			yield this.c = 3;
+		}
+		function F(){
+			return gen.call(gen.prototype);
+		}
+		var g = new F();
+		console.log(g.next());				//{value: 2, done: false}
+		console.log(g.next());				//{value: 3, done: false}
+		console.log(g.next());				//{value: undefined, done: true}
+		console.log(g.a);					// 1
+		console.log(g.b);					// 2
+
+
+
+		//Generator与状态机 
+		function* clock() {
+		  while (true) {
+		    console.log('Tick!');
+		    yield;
+		    console.log('Tock!');
+		    yield;
+		  }
+		};
+		var c = clock()
+		c.next();							//Tick!
+		c.next();							//Tock!
+		c.next();							//Tick!
+		c.next();							//Tock!
+	</script>
+</body>
+</html>
