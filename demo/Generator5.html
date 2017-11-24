@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Genetator.prototype.return()</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// return方法可以返回给定的值，并且终结遍历 Generator 函数。
+		function* gen(){
+			yield 1;
+			yield 2;
+			yield 3;
+		}
+		var g = gen();
+		console.log(g.next());					//{value: 1, done: false}
+		console.log(g.return());					//{value: undefined, done: true}
+		console.log(g.next());						//{value: undefined, done: true}
+
+		//如果 Generator 函数内部有try...finally代码块，那么return方法会推迟到finally代码块执行完再执行。
+	</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Generator与for...of</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// for...of循环可以自动遍历 Generator 函数时生成的Iterator对象，且此时不再需要调用next方法。
+		function* myGenerator(){
+			yield 1;
+			yield 2;
+			yield 3;
+			yield 4;
+			return 5;
+		}
+		var a = myGenerator();
+		for(let x of a){
+			console.log(x);						//1,2,3,4
+		}
+		// for...of循环只会遍历yield值，不能访问return。
+
+
+		// 利用 Generator 函数和for...of循环，实现斐波那契数列的例子。
+		function* fibonacci(){
+			let [perv,curr] = [0,1];
+			for(;;){
+				[perv,curr] = [curr,curr+perv];
+				yield curr;
+			}
+		}
+		for(let i of fibonacci()){
+			if(i>1000) break;
+			console.log(i);
+		}
+	</script>
+</body>
+</html>

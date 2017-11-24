@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Generator函数</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//Generator函数的特征：一是，function关键字与函数名之间有一个星号；二是，函数体内部使用yield表达式，定义不同的内部状态
+		function* myGenerator(){
+			yield 'hello';
+			yield 'world';
+			return 'ending';
+		}
+		var mg = myGenerator();
+		//调用 Generator 函数后，该函数并不执行，返回的也不是函数运行结果，而是一个指向内部状态的指针对象
+		//下一步， 必须调用遍历器对象的next方法，使得指针移向下一个状态
+		//每次调用next方法，内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个yield表达式（或return语句）为止。
+		console.log(mg.next());				//{value: "hello", done: false}
+		console.log(mg.next());				//{value: "world", done: false}
+		console.log(mg.next());				//{value: "ending", done: true}
+		//value属性就是当前yield表达式的值;done属性的值false，表示遍历还没有结束。
+
+
+
+		//-------------------------------向next方法提供参数-------------------------------
+		// 注意，由于next方法的参数表示上一个yield表达式的返回值
+		// 所以在第一次使用next方法时，传递参数是无效的
+		function* foo(x){
+			var y = 2 * (yield(x+1));
+			var z = yield(y/3);
+			return (x+y+z);
+		}
+		var a = foo(5);
+		console.log(a.next());					//{value: 6, done: false}
+		console.log(a.next(12));				//{value: 8, done: false}
+		console.log(a.next(13));				//{value: 42, done: true}   X:5+Y:24+Z:13
+		/*上面代码第一次调用a的next方法时，返回x+1的值6；第二次调用next方法，将上一次yield表达式的值设为12，因此y等于24，返回y / 3的值8；第三次调用next方法，将上一次yield表达式的值设为13，因此z等于13，这时x等于5，y等于24，所以return语句的值等于42。
+		*/
+
+		// 更加直观的例子
+		function* dataConsumer() {
+		  console.log('Started');
+		  console.log(`1. ${yield}`);
+		  console.log(`2. ${yield}`);
+		  return 'result';
+		}
+
+		let genObj = dataConsumer();
+		genObj.next();
+		// Started
+		genObj.next('a')
+		// 1. a
+		genObj.next('b')
+		// 2. b
+
+	</script>
+</body>
+</html>
