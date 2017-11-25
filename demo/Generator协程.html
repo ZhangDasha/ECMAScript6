@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Generator</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 协程的 Generator 函数实现
+
+
+/*
+		// -----------Thunk函数---------------
+		// Thunk 函数的定义，它是“传名调用”的一种实现策略，用来替换某个表达式。
+		// 原始
+		var x = 1;
+		function f(m){
+			console.log(m*2);
+		}
+		f(x+4);						//10
+
+		// 等同于
+
+		var thunk = function(){
+			return x+4;
+		}
+		function f2(foo){
+			console.log(foo()*3);
+		}
+		f2(thunk);						//15
+		//上面代码中，函数 f 的参数x + 4被一个函数替换了。凡是用到原参数的地方，对thunk函数求值即可。
+*/
+
+
+
+
+		// JavaScript中Thunk函数的应用
+		// Thunk作用是将多参数函数，替换成一个只接受回调函数作为参数的单参数函数。           
+		const Thunk = function(fn){
+			return function(...args){
+				return function(callback){
+					return fn.call(this,...args,callback);
+				};
+			};
+		};
+		function f(a,cb){
+			cb(a);
+		}
+		const ft = Thunk(f);
+		console.log(ft);
+		/*
+		ƒ (...args){
+				return function(callback){
+					return fn.call(this,...args,callback);
+				};
+			}
+		*/
+		console.log(ft(1));
+		/*
+		 ƒ (callback){
+				return fn.call(this,...args,callback);
+			}
+		*/
+		ft(1)(console.log);						//1
+	</script>
+
+
+</body>
+</html>
