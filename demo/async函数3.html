@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>async函数----异步Generator处理函数</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 异步遍历器的设计目的之一，就是 Generator 函数处理同步操作和异步操作时，能够使用同一套接口。
+
+		//普通函数 
+		function* map(iterator,func){
+			const iter = iterator[Symbol.iterator]();
+			while(true){
+				const {value,done} = iter.next();
+				if(done) break;
+				yield func(value);
+			}
+		}
+
+		// 异步Generator函数
+		async function* map2(iterator,func){
+			const iter = iterator[Symbol.iterator]();
+			while(true){
+				const {value,done} = await iter.next();
+				if(done) break;
+				yield func(value);
+			}
+		}
+		//await后面的操作，应该返回 Promise 对象。凡是使用yield关键字的地方，就是next方法的停下来的地方
+	</script>
+</body>
+</html>

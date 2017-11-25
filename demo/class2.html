@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>class的基本操作</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 类也可以使用表达式的形式定义
+		const myClass = class Me{
+			constructor(){
+
+			}
+			getClassName(){
+				return Me.name;
+			}
+		};
+		var c = new myClass();
+		console.log(c.getClassName());				//Me
+		// 需要注意的是，这个类的名字是MyClass而不是Me，Me只在 Class 的内部代码可用，指代当前类。
+
+
+
+		// class的静态方法
+		// 静态方法方法不会被实例继承，而是直接通过类来调用。
+		class myClass2 {
+			static getLucky(){
+				console.log('You are a luck boy!');
+			}
+		}
+		myClass2.getLucky();					//You are a luck boy!
+		// 测试
+		var c2 = new myClass2();
+		//c2.getLucky();			//TypeError:c2.getLucky() is undedined
+		// 注意，如果静态方法包含this关键字，这个this指的是类，而不是实例。
+
+
+
+		// new.target属性
+		function Person(name) {
+			if(new.target !== undefined){
+				this.name = name;
+				console.log(this.name);
+			}else{
+				throw new Error('必须使用 new 命令生成实例');
+			}
+		}
+		var person = new Person('张三');					//张三
+		// var notAPerson = Person.call(person,'李四');			//Error:必须使用 new 命令生成实例
+	</script>
+</body>
+</html>
