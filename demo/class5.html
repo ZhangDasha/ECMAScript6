@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>class---继承内部this指向</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// ES6 规定，通过super调用父类的方法时，方法内部的this指向子类。
+		class A{
+			constructor(){
+				this.x = 1;
+				this.y = 3
+			}
+			print(){
+				console.log(this.x);
+			}
+		}
+		class B extends A{
+			constructor(){
+				super()
+				this.x = 2;
+				super.y = 4;			//由于this指向之类，所以在子类中对某个属性赋值时super 相当于 this。
+			}
+			m(){
+				super.print();
+			}
+		}
+		var b = new B()
+		b.m();				// 2
+		/*上面代码中，super.print()虽然调用的是A.prototype.print()，但是A.prototype.print()内部的this指向子类B，导致输出的是2
+		也就是说，实际上执行的是super.print.call(this)。*/
+		
+		console.log(b.y);				// 4
+
+	</script>
+</body>
+</html>
