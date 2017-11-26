@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>原生构造函数的继承</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// ES6 可以自定义原生数据结构的子类
+		class myArray extends Array{
+			constructor(...arg){
+				super(...arg);
+			}
+		}
+		var arr = new myArray();
+		arr = ['a','b',1,2];
+		console.log(arr);					//["a", "b", 1, 2]
+		console.log(arr.length);	// 4
+		//上面代码定义了一个MyArray类，继承了Array构造函数，因此就可以从MyArray生成数组的实例。
+
+
+		// 定制报错时的行为
+		class ExtendableError extends Error{
+			constructor(message){
+				super();
+				this.message = message;
+				this.stack = (new Error()).stack;
+				this.name = this.constructor.name;
+			}
+		}
+		class myError extends ExtendableError{
+			constructor(m){
+				super(m);
+			}
+		}
+		var error = new myError('11');
+		console.log(error.message);				//11
+		console.log(error instanceof Error);			//true
+		console.log(error.name);			//myError
+		console.log(error.stack);
+		//Error
+		//at new ExtendableError (class7.html:27)
+		//at new myError (class7.html:33)
+		//at class7.html:36
+	</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>prototype与__proto__</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//1）子类的__proto__属性，表示构造函数的继承，总是指向父类。
+		//2）子类prototype属性的__proto__属性，表示方法的继承，总是指向父类的prototype属性。
+		class A{
+
+		}
+		class B extends A{
+
+		}
+		console.log(B.__proto__ === A);						//true
+		console.log(B.__proto__.prototype === A.prototype);				//true
+
+
+
+		//继承实现原理
+		class A2{
+			luck(){
+				console.log('lucky boy');
+			}
+			static print(){
+				console.log('static:1-1');
+			}
+		}
+		class B2{
+
+		}
+		// new A2();
+		Object.setPrototypeOf(B2.prototype,A2.prototype)		//实现实例继承
+		var b = new B2();
+		b.luck();					//lucky boy
+		Object.setPrototypeOf(B2,A2);						//实现静态继承
+		B2.print();						//static:1-1
+	</script>
+</body>
+</html>
