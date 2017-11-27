@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Module-export</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 模块功能主要由两个命令构成：export和import。export命令用于规定模块的对外接口，import命令用于输入其他模块提供的功能。
+
+		// 如果你希望外部能够读取模块内部的某个变量，就必须使用export关键字输出该变量。
+
+		// profile.js
+		export var firstName = 'Da';
+		export var lastName = 'Sha';
+		export var year = 2017;
+
+		// 等同于
+		var firstName = 'Da';
+		var lastName = 'Sha';
+		var year = 2017;
+		export{firstName,lastName,year};
+		// 上面代码是profile.js文件，保存了用户信息。里面用export命令对外部输出了三个变量。
+
+
+		// export命令除了输出变量，还可以输出函数或类（class）。
+		export function add(x,y){
+			return x+y;
+		}
+		// 或
+		export {add};
+	</script>
+</body>
+</html>

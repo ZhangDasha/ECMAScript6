@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Module---export default</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// export default命令，为模块指定默认输出。
+
+		// export-default.js
+		export default function(){
+			console.log('foo');
+		}
+		// import-default.js
+		import customName from './export-default';
+		customName();			// foo
+		/*上面代码的import命令，可以用任意名称指向export-default.js输出的方法，这时就不需要知道原模块输出的函数名。需要注意的是，这时import命令后面，不使用大括号。*/
+
+	</script>
+</body>
+</html>
