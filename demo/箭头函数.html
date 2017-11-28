@@ -32,7 +32,7 @@
 
 /*
 		//箭头函数的this问题
-		// this固定的
+		// this固定的.函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。
 		function f(){
 			setTimeout(()=>{console.log(this.id)},100);
 		}
